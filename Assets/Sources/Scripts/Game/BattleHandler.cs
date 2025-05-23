@@ -30,11 +30,70 @@ namespace Sources.Scripts.Game
             int playerIndexAction = playerView.GetIndexInOn();
             if (playerIndexAction == -1) return;
             ActionData playerAction = playerData.actions[playerIndexAction];
-            playerView.UpdateButtons(playerIndexAction);
 
             int enemyIndexAction = enemyView.GetRandomIndexInActive();
-            ActionData enemyAction = enemyData.actions[playerIndexAction];
+            ActionData enemyAction = enemyData.actions[enemyIndexAction];
+
+            CalculateBattleResult(playerAction, enemyAction);
+
+            playerView.UpdateButtons(playerIndexAction);
             enemyView.UpdateButtons(enemyIndexAction);
+        }
+
+        private void CalculateBattleResult(ActionData playerAction, ActionData enemyAction)
+        {
+            //enemy
+            //--attack
+            if (enemyAction.missedActionType == playerAction.actionType)
+            {
+                enemyData.lives -= playerAction.actionForce;
+                Debug.Log("Enemy take damage " + playerAction.actionForce);
+            }
+            //--equally
+            else if (playerAction.actionType == enemyAction.actionType)
+            {
+                int damage = enemyAction.actionForce - playerAction.actionForce;
+                if (damage < 0)
+                {
+                    enemyData.lives -= damage;
+                    Debug.Log("Enemy take damage " + damage);
+                }
+            }
+            //--defense
+            else if (playerAction.actionType == enemyAction.blockedActionType)
+            {
+                Debug.Log("Enemy take damage defenses");
+                
+            }
+
+            enemyView.UpdateLivesText(enemyData.lives);
+
+            //player
+            //--attack
+            if (playerAction.missedActionType == enemyAction.actionType)
+            {
+                playerData.lives -= enemyAction.actionForce;
+                Debug.Log("Player take damage " + enemyAction.actionForce);
+                
+            }
+            //--equally
+            else if (enemyAction.actionType == playerAction.actionType)
+            {
+                int damage = playerAction.actionForce - enemyAction.actionForce;
+                if (damage < 0)
+                {
+                    playerData.lives -= damage;
+                    Debug.Log("Player take damage " + damage);
+                    
+                }
+            }
+            //--defense
+            else if (playerAction.actionType == enemyAction.blockedActionType)
+            {
+                Debug.Log("Player take damage defenses");
+            }
+
+            playerView.UpdateLivesText(playerData.lives);
         }
     }
 }

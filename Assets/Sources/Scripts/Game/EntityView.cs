@@ -11,7 +11,7 @@ namespace Sources.Scripts.Game
 
         public void Prepare(int lives, List<ActionData> actions)
         {
-            livesText.text = lives.ToString();
+            UpdateLivesText(lives);
 
             for (int i = 0; i < actionButtons.Count; i++)
             {
@@ -37,7 +37,7 @@ namespace Sources.Scripts.Game
             int index = 0;
             do
             {
-                index = UnityEngine.Random.Range(0, actionButtons.Count);
+                index = Random.Range(0, actionButtons.Count);
             } while (!actionButtons[index].gameObject.activeSelf);
 
             return index;
@@ -48,5 +48,7 @@ namespace Sources.Scripts.Game
             actionButtons[index].SetIsOn(false);
             actionButtons[index].gameObject.SetActive(false);
         }
+
+        public void UpdateLivesText(int lives) => livesText.text = lives.ToString();
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level_01
   m_EditorClassIdentifier: 
   number: 1
-  enemyHealth: 5
+  enemyHealth: 3
   amountActions: 6
   actions:
   - {fileID: 11400000, guid: 8af36e2665d63a048b322cd941bf9f39, type: 2}

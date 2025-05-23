@@ -1332,7 +1332,7 @@ MonoBehaviour:
   levelDataList: {fileID: 11400000, guid: 98bb5ab37d3b5cd41a6a22097c922326, type: 2}
   playerData:
     isPlayer: 1
-    lives: 5
+    lives: 3
     actions: []
   playerView: {fileID: 2098101027}
   enemyData:
