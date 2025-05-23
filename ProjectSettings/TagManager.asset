@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CinemachineTarget
+  - Vehicle
+  - Bullet
+  - Floor
+  - InputManager
+  - BOTWAYPOINT
+  - ChatWindow
+  - PlayerSpawnPoint
+  - UIPlayerInventory
+  - Companion
+  - NetworkManager
   layers:
   - Default
   - TransparentFX
@@ -11,15 +22,15 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Vehicles
+  - Ground
+  - FloorTrigger
+  - WallTrigger
+  - Placeable
+  - PlaceableFloor
+  - Bullet
+  - PlayerCircle
   - 
   - 
   - 
