@@ -7,11 +7,10 @@ using UnityEngine.UI;
 
 namespace Sources.Scripts.Game
 {
-    public class LevelService : MonoBehaviour
+    public class LevelCounterHandler : MonoBehaviour
     {
         [SerializeField] private List<TMP_Text> levelNumberLabels;
         [SerializeField] private Slider sublevelProgressbar;
-
 
         private void OnEnable()
         {
@@ -31,7 +30,6 @@ namespace Sources.Scripts.Game
 
         private void OnInitialize()
         {
-            CommonData.levelNumber = SaveManager.LoadInt(CommonData.PLAYERPREFS_LEVEL_NUMBER, 0);
         }
 
         private void OnAfterInitializeBattle(int maxValue)
@@ -42,7 +40,7 @@ namespace Sources.Scripts.Game
             levelNumberLabels.ForEach(label => label.text = $"Level {CommonData.levelNumber}");
         }
 
-        private void OnNextSublevel(int subLevelNumber)
+        private void OnNextSublevel(int subLevelNumber, int playerLives, int enemyLives)
         {
             sublevelProgressbar.value = subLevelNumber;
         }

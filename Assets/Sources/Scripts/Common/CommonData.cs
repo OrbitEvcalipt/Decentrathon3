@@ -13,6 +13,15 @@
         PlayerWins = 1,
         EnemyWins = 2,
     }
+    
+    public enum EUnitAnimation
+    {
+        Idle,
+        Run,
+        Attack,
+        Aiming,
+        Die,
+    }
 
     public class CommonData
     {

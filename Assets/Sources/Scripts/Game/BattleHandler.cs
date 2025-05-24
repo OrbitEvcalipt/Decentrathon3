@@ -75,6 +75,8 @@ namespace Sources.Scripts.Game
             enemyView.Prepare(enemyData.lives, enemyData.actions);
 
             _counterStepsBattle = playerData.actions.Count;
+
+            EventsHandler.NextSublevel(_currentSubLevel,playerData.lives, enemyData.lives);
         }
 
         /// <summary>
@@ -200,7 +202,6 @@ namespace Sources.Scripts.Game
 
             //увеличиваем подуровень и сверяемся, что ещё есть подуровни
             _currentSubLevel++;
-            EventsHandler.NextSublevel(_currentSubLevel);
             if (_currentSubLevel < levelDataList.levels[CommonData.levelNumber].subLevels.Length)
             {
                 PrepareBattle();
