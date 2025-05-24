@@ -71,10 +71,10 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="26892">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="31796">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="26892" />
+      <option name="pid" value="31796" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
         <list>
@@ -95,7 +95,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748059078964</updated>
-      <workItem from="1748059081358" duration="32406000" />
+      <workItem from="1748059081358" duration="34764000" />
     </task>
     <servers />
   </component>
@@ -127,6 +127,19 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Sources/Scripts/Game/Bootstrap.cs</url>
+          <line>25</line>
+          <properties documentPath="K:\UnityProjects\FunnyBlox\Hackatons\Decentraton3\Assets\Sources\Scripts\Game\Bootstrap.cs" containingFunctionPresentation="Method 'LoadLevelScene'">
+            <startOffsets>
+              <option value="638" />
+            </startOffsets>
+            <endOffsets>
+              <option value="723" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

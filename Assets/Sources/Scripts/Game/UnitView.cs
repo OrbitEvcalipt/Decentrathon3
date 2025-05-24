@@ -5,12 +5,7 @@ namespace Sources.Scripts.Game
 {
     public class UnitView : MonoBehaviour
     {
-        private Animator animator;
-
-        private void Initialize()
-        {
-            animator = GetComponent<Animator>();
-        }
+        [SerializeField] private Animator animator;
 
         public void Despawn()
         {
@@ -19,9 +14,7 @@ namespace Sources.Scripts.Game
 
         public void PlayAnimation(string animationName)
         {
-            if(!animator) Initialize();
             animator.Play(animationName);
         }
-        
     }
 }
