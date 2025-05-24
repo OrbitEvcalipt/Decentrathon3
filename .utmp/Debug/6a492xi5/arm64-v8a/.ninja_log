@@ -1,0 +1,12 @@
+# ninja log v5
+53	6738	7698129595512740	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	65d9e8009fbfb42a
+6740	6877	7698129596879089	E:/deslab.kz/Hackathon/Decentrathon3/Decentrathon3/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/6a492xi5/obj/arm64-v8a/libswappywrapper.so	221068d89f8f1f01
+25	9693	7698129624929360	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	e2b6f8f1aa67991b
+0	9713	7698129625129119	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	29ad89b4ab5e3e63
+19	9715	7698129625164343	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	3c357dab0a488ec6
+37	9717	7698129625114038	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	f6c52a94aa559ad6
+7	9735	7698129625407702	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	bac417846fdab0a0
+31	9849	7698129626535610	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b0c1e72652b4bcbd
+13	9946	7698129627430570	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	5b9e693fb8f919c9
+47	9957	7698129627546838	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	8b0e9c1d494131e2
+9957	10105	7698129629175084	E:/deslab.kz/Hackathon/Decentrathon3/Decentrathon3/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/6a492xi5/obj/arm64-v8a/libgame.so	8a856561cac75473
