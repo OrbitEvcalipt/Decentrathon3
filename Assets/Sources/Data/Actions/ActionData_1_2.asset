@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ActionData_1_2
   m_EditorClassIdentifier: 
   name: Poison
-  sprite: {fileID: 21300000, guid: 2cb7d218034724ea7bed9cc65710a99d, type: 3}
+  level: 1
   actionType: 1
-  actionValue: 1
+  sprite: {fileID: 21300000, guid: f0b6f55a903a8874db7b643503376c52, type: 3}
+  actionForce: 1
   missedActionType: 0
   blockedActionType: 2

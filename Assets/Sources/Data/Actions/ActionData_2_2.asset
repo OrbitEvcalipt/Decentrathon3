@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Poison
   level: 2
   actionType: 1
-  sprite: {fileID: 21300000, guid: 2cb7d218034724ea7bed9cc65710a99d, type: 3}
-  actionValue: 4
+  sprite: {fileID: 21300000, guid: a4c4d0779a25de24fb74196bebb74102, type: 3}
+  actionForce: 1
   missedActionType: 0
   blockedActionType: 2
