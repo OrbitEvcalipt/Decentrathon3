@@ -155,11 +155,7 @@ MonoBehaviour:
   m_DefaultDrawerSettings:
     DrawerID: DefaultSettings
     Created: 0
-<<<<<<< HEAD
-    Modified: 638836302115593583
-=======
-    Modified: 638835982456401906
->>>>>>> 6f3dbfe984a5157fdee325532cbd7ad0963c6f62
+    Modified: 638836473617187502
     DrawerOptionSection: 0
     StripeHeight: 2
     PalettePath: Default

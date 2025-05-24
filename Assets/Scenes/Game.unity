@@ -119,6 +119,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &237418819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 237418820}
+  - component: {fileID: 237418821}
+  m_Layer: 0
+  m_Name: GameEventsService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &237418820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237418819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2013399122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &237418821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237418819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8debcaca0f4d60b36c1acea4362434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &273969567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -424,9 +468,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316374367}
   m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &316374370
 MonoBehaviour:
@@ -2614,7 +2658,7 @@ GameObject:
   - component: {fileID: 1700563042}
   - component: {fileID: 1700563043}
   m_Layer: 5
-  m_Name: ScreenStarting
+  m_Name: ScreenMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2648,9 +2692,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700563040}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1700563043
 MonoBehaviour:
@@ -2756,21 +2800,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 838509453}
-        m_TargetAssemblyTypeName: Sources.Scripts.Game.BattleHandler, Assembly-CSharp
-        m_MethodName: PrepareBattle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 316374370}
-        m_TargetAssemblyTypeName: FunnyBlox.GUI.GUICanvasGroup, Assembly-CSharp
-        m_MethodName: Show
+      - m_Target: {fileID: 237418821}
+        m_TargetAssemblyTypeName: Sources.Scripts.Game.GameEventsService, Assembly-CSharp
+        m_MethodName: OnGameStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3145,6 +3177,7 @@ Transform:
   - {fileID: 838509452}
   - {fileID: 2098101026}
   - {fileID: 1170335807}
+  - {fileID: 237418820}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2018554203
@@ -3159,6 +3192,7 @@ GameObject:
   - component: {fileID: 2018554206}
   - component: {fileID: 2018554205}
   - component: {fileID: 2018554204}
+  - component: {fileID: 2018554208}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -3250,6 +3284,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2018554208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018554203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9388031d666c4c168a401c763314184b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenMenu: {fileID: 1700563043}
+  screenBattle: {fileID: 316374370}
 --- !u!1 &2043539026
 GameObject:
   m_ObjectHideFlags: 0

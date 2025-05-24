@@ -1,4 +1,9 @@
+using System;
 using System.Linq;
+using FunnyBlox;
+using Sources.Scripts.Common;
+using Sources.Scripts.Data;
+using Sources.Scripts.Utils;
 using UnityEngine;
 
 namespace Sources.Scripts.Game
@@ -13,6 +18,15 @@ namespace Sources.Scripts.Game
         [SerializeField] private EntityData enemyData;
         [SerializeField] private EntityView enemyView;
 
+        private void OnEnable()
+        {
+            EventsHandler.OnGameStart += PrepareBattle;
+        }
+
+        private void OnDisable()
+        {
+            EventsHandler.OnGameStart -= PrepareBattle;
+        }
 
         public void PrepareBattle()
         {
@@ -42,58 +56,57 @@ namespace Sources.Scripts.Game
 
         private void CalculateBattleResult(ActionData playerAction, ActionData enemyAction)
         {
-            //enemy
-            //--attack
-            if (enemyAction.missedActionType == playerAction.actionType)
+            EBattleResult battleResult = CompareActionType(playerAction.actionType, enemyAction.actionType);
+            switch (battleResult)
             {
-                enemyData.lives -= playerAction.actionForce;
-                Debug.Log("Enemy take damage " + playerAction.actionForce);
-            }
-            //--equally
-            else if (playerAction.actionType == enemyAction.actionType)
-            {
-                int damage = enemyAction.actionForce - playerAction.actionForce;
-                if (damage < 0)
-                {
-                    enemyData.lives -= damage;
-                    Debug.Log("Enemy take damage " + damage);
-                }
-            }
-            //--defense
-            else if (playerAction.actionType == enemyAction.blockedActionType)
-            {
-                Debug.Log("Enemy take damage defenses");
-                
-            }
+                case EBattleResult.Draw:
+                    int playerTakeDamage = playerAction.actionForce - enemyAction.actionForce;
+                    playerData.lives -= playerTakeDamage;
 
-            enemyView.UpdateLivesText(enemyData.lives);
+                    int enemyTakeDamage = enemyAction.actionForce - playerAction.actionForce;
+                    enemyData.lives -= enemyTakeDamage;
+                    Debug.Log($"Player take damage {playerTakeDamage} and enemy take damage {enemyTakeDamage}");
 
-            //player
-            //--attack
-            if (playerAction.missedActionType == enemyAction.actionType)
-            {
-                playerData.lives -= enemyAction.actionForce;
-                Debug.Log("Player take damage " + enemyAction.actionForce);
-                
-            }
-            //--equally
-            else if (enemyAction.actionType == playerAction.actionType)
-            {
-                int damage = playerAction.actionForce - enemyAction.actionForce;
-                if (damage < 0)
-                {
-                    playerData.lives -= damage;
-                    Debug.Log("Player take damage " + damage);
-                    
-                }
-            }
-            //--defense
-            else if (playerAction.actionType == enemyAction.blockedActionType)
-            {
-                Debug.Log("Player take damage defenses");
+                    break;
+                case EBattleResult.PlayerWins:
+                    enemyData.lives -= playerAction.actionForce;
+                    Debug.Log($"Enemy take damage {playerAction.actionForce}");
+                    break;
+                case EBattleResult.EnemyWins:
+                    playerData.lives -= enemyAction.actionForce;
+                    Debug.Log($"Player take damage {enemyAction.actionForce}");
+                    break;
             }
 
             playerView.UpdateLivesText(playerData.lives);
+            enemyView.UpdateLivesText(enemyData.lives);
+
+            if (enemyData.lives <= 0)
+            {
+                Debug.Log("Player wins");
+                EventsHandler.GameWin();
+            }
+            else if (playerData.lives <= 0)
+            {
+                Debug.Log("Player lose");
+                EventsHandler.GameOver();
+            }
+        }
+
+        private EBattleResult CompareActionType(EActionType player, EActionType enemy)
+        {
+            if (player == enemy)
+                return EBattleResult.Draw;
+
+            // Победные комбинации: (player1 - player2 + 3) % 3 == 1
+            // Примеры:
+            // Stone (0) beats Scissors (1): (0 - 1 + 3) % 3 == 2 % 3 == 2 → PlayerWins
+            // Scissors (1) beats Paper (2): (1 - 2 + 3) % 3 == 2 → PlayerWins
+            // Paper (2) beats Stone (0): (2 - 0 + 3) % 3 == 5 % 3 == 2 → PlayerWins
+
+            int result = ((int)player - (int)enemy + 3) % 3;
+
+            return result == 1 ? EBattleResult.EnemyWins : EBattleResult.PlayerWins;
         }
     }
 }

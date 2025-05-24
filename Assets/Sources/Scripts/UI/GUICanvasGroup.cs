@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace FunnyBlox.GUI
+namespace Sources.Scripts.UI
 {
   [RequireComponent(typeof(CanvasGroup))]
   public class GUICanvasGroup : MonoBehaviour

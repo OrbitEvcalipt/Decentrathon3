@@ -1,7 +1,8 @@
 ﻿using Sirenix.OdinInspector;
+using Sources.Scripts.Common;
 using UnityEngine;
 
-namespace Sources.Scripts.Game
+namespace Sources.Scripts.Data
 {
     [CreateAssetMenu(menuName = "Data/Create ActionData", fileName = "ActionData", order = 0)]
     public class ActionData: ScriptableObject
