@@ -1,10 +1,9 @@
-using System;
 using System.Linq;
-using FunnyBlox;
 using Sources.Scripts.Common;
 using Sources.Scripts.Data;
 using Sources.Scripts.Utils;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Sources.Scripts.Game
 {
@@ -32,12 +31,13 @@ namespace Sources.Scripts.Game
 
         public void PrepareBattle()
         {
-            playerData.lives = levelDataList.levels[0].enemyHealth;//TODO: сюда прокидывать жизнь игрока из глобала
-            playerData.actions = levelDataList.levels[0].actions.ToList();
+            Random rng = new Random();
+            playerData.lives = levelDataList.levels[0].enemyHealth; //TODO: сюда прокидывать жизнь игрока из глобала
+            playerData.actions = levelDataList.levels[0].actions.OrderBy(action => rng.Next()).ToList();
             playerView.Prepare(playerData.lives, playerData.actions);
 
             enemyData.lives = levelDataList.levels[0].enemyHealth;
-            enemyData.actions = levelDataList.levels[0].actions.ToList();
+            enemyData.actions = levelDataList.levels[0].actions.OrderBy(action => rng.Next()).ToList();
             enemyView.Prepare(enemyData.lives, enemyData.actions);
 
             counterStepsBattle = playerData.actions.Count;
@@ -62,6 +62,9 @@ namespace Sources.Scripts.Game
 
         private void CalculateBattleResult(ActionData playerAction, ActionData enemyAction)
         {
+            Debug.Log($"Player: {playerAction.actionType}({playerAction.actionForce}) ----" +
+                      $" Enemy: {enemyAction.actionType}({enemyAction.actionForce})");
+
             EBattleResult battleResult = CompareActionType(playerAction.actionType, enemyAction.actionType);
             switch (battleResult)
             {
@@ -121,8 +124,14 @@ namespace Sources.Scripts.Game
             if (counterStepsBattle <= 0)
             {
                 Debug.Log("Continue battle");
+                
+                Random rng = new Random();
+                playerData.actions = playerData.actions.OrderBy(action => rng.Next()).ToList();
                 playerView.Prepare(playerData.lives, playerData.actions);
+
+                enemyData.actions = enemyData.actions.OrderBy(action => rng.Next()).ToList();
                 enemyView.Prepare(enemyData.lives, enemyData.actions);
+                
                 counterStepsBattle = playerData.actions.Count;
             }
         }
