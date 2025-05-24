@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Cross
   level: 1
   actionType: 2
-  sprite: {fileID: -766730691, guid: aad89fce901f142a0a91f7dcf21d7245, type: 3}
-  actionValue: 1
+  sprite: {fileID: 21300000, guid: 6f389ffd656a24d4f92fd684ac10ec23, type: 3}
+  actionForce: 1
   missedActionType: 1
   blockedActionType: 0

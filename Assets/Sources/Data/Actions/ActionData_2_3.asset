@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Hit
   level: 2
   actionType: 2
-  sprite: {fileID: 21300000, guid: 2eda31c38b4c64cd6a4076f1f4c50dee, type: 3}
-  actionValue: 3
+  sprite: {fileID: 21300000, guid: 6679eb32ec349ea4f827d016d45b2ba5, type: 3}
+  actionForce: 1
   missedActionType: 1
   blockedActionType: 0
