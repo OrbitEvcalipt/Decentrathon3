@@ -1,0 +1,26 @@
+Third-Party Notice
+
+This asset is governed by the Asset Store EULA; however, the following components are governed by the licenses indicated below:
+
+A. Texture1 - Texture338
+textures.com Terms of Use version v3.9 (February 2021)
+https://www.textures.com/about/terms-of-use
+
+B. TextureUnsplash1 - TextureUnsplash5
+unsplash.com Terms of Use 2021
+https://unsplash.com/license
+
+
+C. TexturePixabay1 - TexturePixabay2
+Pixabay.com Terms of Service Revision: March 27, 2020
+https://pixabay.com/service/license
+
+
+D. Texturefreepik1 - Texturefreepik2
+freepikcompany.com Terms of Service June 2019
+https://www.freepikcompany.com/legal#nav-freepik
+
+
+
+One or more textures on these 3D model's have been created with photographs from Textures.com. These
+photographs may not be redistributed by default; please visit www.textures.com for more information.
