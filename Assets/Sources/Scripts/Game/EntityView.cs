@@ -16,6 +16,8 @@ namespace Sources.Scripts.Game
 
             for (int i = 0; i < actionButtons.Count; i++)
             {
+                actionButtons[i].SetIsOn(false);
+                actionButtons[i].gameObject.SetActive(true);
                 actionButtons[i].Setup(
                     actions[i].sprite,
                     actions[i].actionForce.ToString()

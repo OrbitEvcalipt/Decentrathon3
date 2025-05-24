@@ -18,6 +18,8 @@ namespace Sources.Scripts.Game
         [SerializeField] private EntityData enemyData;
         [SerializeField] private EntityView enemyView;
 
+        private int counterStepsBattle;
+
         private void OnEnable()
         {
             EventsHandler.OnGameStart += PrepareBattle;
@@ -30,13 +32,15 @@ namespace Sources.Scripts.Game
 
         public void PrepareBattle()
         {
-            playerData.lives = playerData.lives;
+            playerData.lives = levelDataList.levels[0].enemyHealth;//TODO: сюда прокидывать жизнь игрока из глобала
             playerData.actions = levelDataList.levels[0].actions.ToList();
             playerView.Prepare(playerData.lives, playerData.actions);
 
             enemyData.lives = levelDataList.levels[0].enemyHealth;
             enemyData.actions = levelDataList.levels[0].actions.ToList();
             enemyView.Prepare(enemyData.lives, enemyData.actions);
+
+            counterStepsBattle = playerData.actions.Count;
         }
 
         public void StartBattle()
@@ -52,6 +56,8 @@ namespace Sources.Scripts.Game
 
             playerView.UpdateButtons(playerIndexAction);
             enemyView.UpdateButtons(enemyIndexAction);
+
+            ContinueBattle();
         }
 
         private void CalculateBattleResult(ActionData playerAction, ActionData enemyAction)
@@ -107,6 +113,18 @@ namespace Sources.Scripts.Game
             int result = ((int)player - (int)enemy + 3) % 3;
 
             return result == 1 ? EBattleResult.EnemyWins : EBattleResult.PlayerWins;
+        }
+
+        private void ContinueBattle()
+        {
+            counterStepsBattle--;
+            if (counterStepsBattle <= 0)
+            {
+                Debug.Log("Continue battle");
+                playerView.Prepare(playerData.lives, playerData.actions);
+                enemyView.Prepare(enemyData.lives, enemyData.actions);
+                counterStepsBattle = playerData.actions.Count;
+            }
         }
     }
 }
