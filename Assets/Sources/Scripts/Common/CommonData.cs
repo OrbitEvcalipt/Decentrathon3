@@ -16,5 +16,9 @@
 
     public class CommonData
     {
+        public static int playerHealth;
+        
+        public const string PLAYERPREFS_LEVEL_NUMBER = "LevelNumber";
+        public static int levelNumber;
     }
 }

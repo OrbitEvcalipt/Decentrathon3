@@ -2,6 +2,7 @@
 using Sources.Scripts.Data;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Sources.Scripts.Game
 {

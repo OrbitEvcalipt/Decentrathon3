@@ -1,4 +1,5 @@
 using System.Linq;
+using FunnyBlox.Game;
 using Sources.Scripts.Common;
 using Sources.Scripts.Data;
 using Sources.Scripts.Utils;
@@ -17,32 +18,68 @@ namespace Sources.Scripts.Game
         [SerializeField] private EntityData enemyData;
         [SerializeField] private EntityView enemyView;
 
-        private int counterStepsBattle;
+        [Space] [SerializeField] private int _currentLevel;
+        [SerializeField] private int _currentSubLevel;
+        [SerializeField] private int _counterStepsBattle;
 
         private void OnEnable()
         {
-            EventsHandler.OnGameStart += PrepareBattle;
+            EventsHandler.OnGameStart += InitializeBattle;
         }
 
         private void OnDisable()
         {
-            EventsHandler.OnGameStart -= PrepareBattle;
+            EventsHandler.OnGameStart -= InitializeBattle;
         }
 
-        public void PrepareBattle()
+        /// <summary>
+        /// Из меню запустили бой
+        /// </summary>
+        private void InitializeBattle()
+        {
+            CommonData.playerHealth = 3;
+
+            Random rng = new Random();
+
+            //Номер уровня
+            _currentLevel = CommonData.levelNumber;
+            //если больше количества уровней в списке
+            if (_currentLevel >= levelDataList.levels.Length)
+                _currentLevel = rng.Next(levelDataList.levels.Length);
+
+            _currentSubLevel = 0;
+            PrepareBattle();
+
+            EventsHandler.AfterInitializeBattle(levelDataList.levels[CommonData.levelNumber].subLevels.Length);
+        }
+
+        /// <summary>
+        /// Подготовка данных в подуровне
+        /// </summary>
+        private void PrepareBattle()
         {
             Random rng = new Random();
-            playerData.lives = levelDataList.levels[0].enemyHealth; //TODO: сюда прокидывать жизнь игрока из глобала
-            playerData.actions = levelDataList.levels[0].actions.OrderBy(action => rng.Next()).ToList();
+
+            playerData.lives = CommonData.playerHealth; //TODO: сюда прокидывать жизнь игрока из глобала
+            playerData.actions = levelDataList.levels[_currentLevel]
+                .subLevels[_currentSubLevel]
+                .actions.OrderBy(action => rng.Next()).ToList();
             playerView.Prepare(playerData.lives, playerData.actions);
 
-            enemyData.lives = levelDataList.levels[0].enemyHealth;
-            enemyData.actions = levelDataList.levels[0].actions.OrderBy(action => rng.Next()).ToList();
+            enemyData.lives = levelDataList.levels[_currentLevel]
+                .subLevels[_currentSubLevel]
+                .enemyHealth;
+            enemyData.actions = levelDataList.levels[_currentLevel]
+                .subLevels[_currentSubLevel]
+                .actions.OrderBy(action => rng.Next()).ToList();
             enemyView.Prepare(enemyData.lives, enemyData.actions);
 
-            counterStepsBattle = playerData.actions.Count;
+            _counterStepsBattle = playerData.actions.Count;
         }
 
+        /// <summary>
+        /// Запуск активности с кнопки
+        /// </summary>
         public void StartBattle()
         {
             int playerIndexAction = playerView.GetIndexInOn();
@@ -60,6 +97,11 @@ namespace Sources.Scripts.Game
             ContinueBattle();
         }
 
+        /// <summary>
+        /// Считаем результат активности игрока и врага
+        /// </summary>
+        /// <param name="playerAction"></param>
+        /// <param name="enemyAction"></param>
         private void CalculateBattleResult(ActionData playerAction, ActionData enemyAction)
         {
             Debug.Log($"Player: {playerAction.actionType}({playerAction.actionForce}) ----" +
@@ -92,8 +134,7 @@ namespace Sources.Scripts.Game
 
             if (enemyData.lives <= 0)
             {
-                Debug.Log("Player wins");
-                EventsHandler.GameWin();
+                Invoke("CheckWinState", 0.1f);
             }
             else if (playerData.lives <= 0)
             {
@@ -102,6 +143,12 @@ namespace Sources.Scripts.Game
             }
         }
 
+        /// <summary>
+        /// Расчёт победителя
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="enemy"></param>
+        /// <returns></returns>
         private EBattleResult CompareActionType(EActionType player, EActionType enemy)
         {
             if (player == enemy)
@@ -118,22 +165,59 @@ namespace Sources.Scripts.Game
             return result == 1 ? EBattleResult.EnemyWins : EBattleResult.PlayerWins;
         }
 
+        /// <summary>
+        /// Проверка оставшегося количества активностей
+        /// </summary>
         private void ContinueBattle()
         {
-            counterStepsBattle--;
-            if (counterStepsBattle <= 0)
+            _counterStepsBattle--;
+            if (_counterStepsBattle <= 0)
             {
+                // Если активности закончились, наполняем список вновь
                 Debug.Log("Continue battle");
-                
+
                 Random rng = new Random();
                 playerData.actions = playerData.actions.OrderBy(action => rng.Next()).ToList();
                 playerView.Prepare(playerData.lives, playerData.actions);
 
                 enemyData.actions = enemyData.actions.OrderBy(action => rng.Next()).ToList();
                 enemyView.Prepare(enemyData.lives, enemyData.actions);
-                
-                counterStepsBattle = playerData.actions.Count;
+
+                _counterStepsBattle = playerData.actions.Count;
             }
+        }
+
+        private void CheckWinState()
+        {
+            //выдаём награду за текущий подуровень
+            foreach (RewardedCurrency currency in levelDataList.levels[CommonData.levelNumber]
+                         .subLevels[_currentSubLevel].RewardedCurrencies)
+            {
+                CurrencyManager.instance.UpdateAmount(
+                    currency.name,
+                    currency.amount);
+            }
+
+            //увеличиваем подуровень и сверяемся, что ещё есть подуровни
+            _currentSubLevel++;
+            EventsHandler.NextSublevel(_currentSubLevel);
+            if (_currentSubLevel < levelDataList.levels[CommonData.levelNumber].subLevels.Length)
+            {
+                PrepareBattle();
+                return;
+            }
+
+            //выдаём награду за уровень
+            foreach (RewardedCurrency currency in levelDataList.levels[CommonData.levelNumber].RewardedCurrencies)
+            {
+                CurrencyManager.instance.UpdateAmount(
+                    currency.name,
+                    currency.amount);
+            }
+
+            //победа, выходим в меню 
+            Debug.Log("Player wins");
+            EventsHandler.GameWin();
         }
     }
 }

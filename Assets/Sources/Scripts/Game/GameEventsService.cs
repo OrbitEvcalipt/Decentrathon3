@@ -9,5 +9,10 @@ namespace Sources.Scripts.Game
         {
             EventsHandler.GameStart();
         }
+
+        public void ClaimBattleResult()
+        {
+            EventsHandler.ClaimBattleResult();
+        }
     }
 }

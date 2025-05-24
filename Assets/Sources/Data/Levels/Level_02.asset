@@ -13,10 +13,48 @@ MonoBehaviour:
   m_Name: Level_02
   m_EditorClassIdentifier: 
   number: 2
-  enemyHealth: 6
-  amountActions: 6
-  actions:
-  - {fileID: 11400000, guid: 8af36e2665d63a048b322cd941bf9f39, type: 2}
-  - {fileID: 11400000, guid: 7b69d52b563961a4896fcfff66401542, type: 2}
-  - {fileID: 11400000, guid: 1d73eacebc35249449894ddcb992a9aa, type: 2}
-  rewardedValue: 10
+  RewardedCurrencies:
+  - name: Coins
+    amount: 10
+  - name: Gems
+    amount: 1
+  subLevels:
+  - number: 1
+    enemyHealth: 2
+    amountActions: 6
+    actions:
+    - {fileID: 11400000, guid: 8af36e2665d63a048b322cd941bf9f39, type: 2}
+    - {fileID: 11400000, guid: 7b69d52b563961a4896fcfff66401542, type: 2}
+    - {fileID: 11400000, guid: 1d73eacebc35249449894ddcb992a9aa, type: 2}
+    - {fileID: 11400000, guid: 63244f235b0051247a3e5a8fdec89d01, type: 2}
+    - {fileID: 11400000, guid: 33d024722af582a44b5a5578c544e852, type: 2}
+    - {fileID: 11400000, guid: 35831d18258815e4fa0c9acfbe01ed12, type: 2}
+    RewardedCurrencies:
+    - name: Coins
+      amount: 3
+  - number: 3
+    enemyHealth: 2
+    amountActions: 6
+    actions:
+    - {fileID: 11400000, guid: 8af36e2665d63a048b322cd941bf9f39, type: 2}
+    - {fileID: 11400000, guid: 7b69d52b563961a4896fcfff66401542, type: 2}
+    - {fileID: 11400000, guid: 1d73eacebc35249449894ddcb992a9aa, type: 2}
+    - {fileID: 11400000, guid: 63244f235b0051247a3e5a8fdec89d01, type: 2}
+    - {fileID: 11400000, guid: 33d024722af582a44b5a5578c544e852, type: 2}
+    - {fileID: 11400000, guid: 35831d18258815e4fa0c9acfbe01ed12, type: 2}
+    RewardedCurrencies:
+    - name: Coins
+      amount: 3
+  - number: 3
+    enemyHealth: 3
+    amountActions: 6
+    actions:
+    - {fileID: 11400000, guid: 8af36e2665d63a048b322cd941bf9f39, type: 2}
+    - {fileID: 11400000, guid: 7b69d52b563961a4896fcfff66401542, type: 2}
+    - {fileID: 11400000, guid: 1d73eacebc35249449894ddcb992a9aa, type: 2}
+    - {fileID: 11400000, guid: 63244f235b0051247a3e5a8fdec89d01, type: 2}
+    - {fileID: 11400000, guid: 33d024722af582a44b5a5578c544e852, type: 2}
+    - {fileID: 11400000, guid: 35831d18258815e4fa0c9acfbe01ed12, type: 2}
+    RewardedCurrencies:
+    - name: Coins
+      amount: 3
