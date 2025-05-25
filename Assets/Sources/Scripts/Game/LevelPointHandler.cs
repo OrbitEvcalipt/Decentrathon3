@@ -22,6 +22,7 @@ namespace Sources.Scripts.Game
                     , Quaternion.identity
                 ).Component;
 
+                unit.transform.parent = transform;
                 unit.PlayAnimation(nameof(EUnitAnimation.Idle));
                 units.Add(unit);
 

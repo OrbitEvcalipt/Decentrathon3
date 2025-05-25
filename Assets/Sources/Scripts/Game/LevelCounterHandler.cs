@@ -15,16 +15,16 @@ namespace Sources.Scripts.Game
         private void OnEnable()
         {
             EventsHandler.OnInitialize += OnInitialize;
-            EventsHandler.OnAfterInitializeBattle += OnAfterInitializeBattle;
-            EventsHandler.OnNextSublevel += OnNextSublevel;
+            EventsHandler.OnBattlePhase_AfterInitialize += OnAfterInitializeBattle;
+            EventsHandler.OnBattlePhase_NextSublevel += OnNextSublevel;
             EventsHandler.OnGameWin += OnGameWin;
         }
 
         private void OnDisable()
         {
             EventsHandler.OnInitialize -= OnInitialize;
-            EventsHandler.OnAfterInitializeBattle -= OnAfterInitializeBattle;
-            EventsHandler.OnNextSublevel -= OnNextSublevel;
+            EventsHandler.OnBattlePhase_AfterInitialize -= OnAfterInitializeBattle;
+            EventsHandler.OnBattlePhase_NextSublevel -= OnNextSublevel;
             EventsHandler.OnGameWin -= OnGameWin;
         }
 

@@ -8,6 +8,8 @@ namespace Sources.Scripts.Game
 {
     public class Bootstrap : MonoBehaviour
     {
+        [SerializeField] private GameObject loadingScreenObject;
+
         private void Start()
         {
             StartCoroutine(LoadLevelScene());
@@ -22,10 +24,12 @@ namespace Sources.Scripts.Game
             {
                 yield return null;
             }
-            
+
             CommonData.levelNumber = SaveManager.LoadInt(CommonData.PLAYERPREFS_LEVEL_NUMBER, 0);
-            
+
             EventsHandler.Initialize();
+
+            Destroy(loadingScreenObject);
         }
     }
 }

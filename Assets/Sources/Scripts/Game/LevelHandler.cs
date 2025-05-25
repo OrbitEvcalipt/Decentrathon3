@@ -16,20 +16,21 @@ namespace Sources.Scripts.Game
         private void OnEnable()
         {
             EventsHandler.OnGameStart += Initialize;
-            EventsHandler.OnNextSublevel += OnNextSublevel;
+            EventsHandler.OnBattlePhase_Attack += OnAttack;
+            EventsHandler.OnBattlePhase_NextSublevel += OnNextSublevel;
             EventsHandler.OnClaimBattleResult += ClearLevel;
         }
 
         private void OnDisable()
         {
             EventsHandler.OnGameStart -= Initialize;
-            EventsHandler.OnNextSublevel -= OnNextSublevel;
+            EventsHandler.OnBattlePhase_Attack -= OnAttack;
+            EventsHandler.OnBattlePhase_NextSublevel -= OnNextSublevel;
             EventsHandler.OnClaimBattleResult -= ClearLevel;
         }
 
         private void Initialize()
         {
-            
         }
 
         private void OnNextSublevel(int index, int playerLives, int enemyLives)
@@ -37,6 +38,7 @@ namespace Sources.Scripts.Game
             _currentPointIndex = index;
             if (_currentPointIndex == 0)
             {
+                playerPoint.transform.position = battlePoints[0].transform.position;
                 playerPoint.Initialize(playerLives);
             }
             else

@@ -18,20 +18,6 @@ namespace Sources.Scripts.Utils
             OnGameStart?.Invoke();
         }
 
-        public static event Action<int> OnAfterInitializeBattle;
-
-        public static void AfterInitializeBattle(int index)
-        {
-            OnAfterInitializeBattle?.Invoke(index);
-        }
-
-        public static event Action<int, int, int> OnNextSublevel;
-
-        public static void NextSublevel(int index, int playerLives, int enemyLives)
-        {
-            OnNextSublevel?.Invoke(index, playerLives, enemyLives);
-        }
-
         public static event Action OnGameWin;
 
         public static void GameWin()
@@ -52,6 +38,29 @@ namespace Sources.Scripts.Utils
         public static void ClaimBattleResult()
         {
             OnClaimBattleResult?.Invoke();
+        }
+
+
+        //---------------BATTLE PHASE---------------
+        public static event Action<int> OnBattlePhase_AfterInitialize;
+
+        public static void BattlePhase_AfterInitialize(int index)
+        {
+            OnBattlePhase_AfterInitialize?.Invoke(index);
+        }
+
+        public static event Action OnBattlePhase_Attack;
+
+        public static void BattlePhase_Attack()
+        {
+            OnBattlePhase_Attack?.Invoke();
+        }
+
+        public static event Action<int, int, int> OnBattlePhase_NextSublevel;
+
+        public static void BattlePhase_NextSublevel(int index, int playerLives, int enemyLives)
+        {
+            OnBattlePhase_NextSublevel?.Invoke(index, playerLives, enemyLives);
         }
     }
 }

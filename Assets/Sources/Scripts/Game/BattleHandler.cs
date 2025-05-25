@@ -50,7 +50,7 @@ namespace Sources.Scripts.Game
             _currentSubLevel = 0;
             PrepareBattle();
 
-            EventsHandler.AfterInitializeBattle(levelDataList.levels[CommonData.levelNumber].subLevels.Length);
+            EventsHandler.BattlePhase_AfterInitialize(levelDataList.levels[CommonData.levelNumber].subLevels.Length);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Sources.Scripts.Game
 
             _counterStepsBattle = playerData.actions.Count;
 
-            EventsHandler.NextSublevel(_currentSubLevel,playerData.lives, enemyData.lives);
+            EventsHandler.BattlePhase_NextSublevel(_currentSubLevel,playerData.lives, enemyData.lives);
         }
 
         /// <summary>
@@ -84,6 +84,7 @@ namespace Sources.Scripts.Game
         /// </summary>
         public void StartBattle()
         {
+            EventsHandler.BattlePhase_Attack();
             int playerIndexAction = playerView.GetIndexInOn();
             if (playerIndexAction == -1) return;
             ActionData playerAction = playerData.actions[playerIndexAction];
@@ -91,10 +92,10 @@ namespace Sources.Scripts.Game
             int enemyIndexAction = enemyView.GetRandomIndexInActive();
             ActionData enemyAction = enemyData.actions[enemyIndexAction];
 
-            CalculateBattleResult(playerAction, enemyAction);
-
             playerView.UpdateButtons(playerIndexAction);
             enemyView.UpdateButtons(enemyIndexAction);
+            
+            CalculateBattleResult(playerAction, enemyAction);
 
             ContinueBattle();
         }
